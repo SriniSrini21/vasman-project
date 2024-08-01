@@ -24,8 +24,8 @@ jobs:
         version: 'latest'
 
     - name: Setup Helm
-      uses: actions/setup-helm@v1
+      uses: helm/helm@v1
       with:
-        version: v3.5.4
+        version: v3.8.2
 
 
