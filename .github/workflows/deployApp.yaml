@@ -22,7 +22,7 @@ jobs:
       uses: azure/setup-kubectl@v2
 
     - name: Update kubeconfig
-      run: aws eks update-kubeconfig --name my-cluster --region us-west-2
+      run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
     - name: Install Helm
       run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
