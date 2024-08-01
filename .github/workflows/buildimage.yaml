@@ -27,5 +27,5 @@ jobs:
 
       - name: Build and push image
         run: |
-          docker build -t vasman-test.azurecr.io/vasman-test:latest .
-          docker push vasman-test.azurecr.io/vasman-test:latest
+          docker build -t vasman-test .
+          docker push public.ecr.aws/k3f5q1f1/vasman-test:latest
