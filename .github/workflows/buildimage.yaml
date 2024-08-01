@@ -27,5 +27,5 @@ jobs:
 
       - name: Build and push image
         run: |
-          docker build -t ${{ secrets.ACCOUNT_ID }}.dkr.ecr.us-west-2.amazonaws.com/vasman-test:vasman-test .
-          docker push ${{ secrets.ACCOUNT_ID }}.dkr.ecr.us-west-2.amazonaws.com/vasman-test:vasman-test
+          docker build -t vasman-test.azurecr.io/vasman-test:latest .
+          docker push vasman-test.azurecr.io/vasman-test:latest
