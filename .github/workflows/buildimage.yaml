@@ -21,11 +21,13 @@ jobs:
   
 
 
-      - name: Login to ECR
-        run: |
-          aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${{ secrets.ACCOUNT_ID }}.dkr.ecr.us-west-2.amazonaws.com
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry-id: ${{ secrets.AWS_ACCOUNT_ID }}
+          repository-name: vasman-test
 
-      - name: Build and push image
+      - name: Build and Push Image
         run: |
-          docker build -t vasman-test .
-          docker push public.ecr.aws/k3f5q1f1/vasman-test:latest
+          docker build -t vasman-test:latest .
+          docker push vasman-test:latest
