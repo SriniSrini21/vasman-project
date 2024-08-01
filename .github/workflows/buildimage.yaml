@@ -19,11 +19,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1
+      - name: Login to Docker Hub
+        run: docker login -u srini19081998 -p Hihihi98!
 
-      - name: Build and Push Image
+      - name: Build  and Push Images
         run: |
-          docker build -t vasman-test:latest .
-          docker tag vasman-test:latest ${{ secrets.ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/vasman-test:latest
-          docker push ${{ secrets.ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/vasman-test:latest
+          docker build -t srini19081998/microservices-demo-auth:latest auth/.
+          docker push srini19081998/microservices-demo-auth:latest
+          docker build -t srini19081998/microservices-demo-account:latest account/.
+          docker push srini19081998/microservices-demo-account:latest
+          # Add more build and push commands for other services
