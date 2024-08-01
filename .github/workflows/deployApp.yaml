@@ -27,5 +27,8 @@ jobs:
     - name: Install Helm
       run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
+    - name: List Namespaces
+      run: kubectl get namespaces
+
 
 
