@@ -1,7 +1,7 @@
 name: Build and Push Docker Image
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -14,20 +14,18 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}  # Replace with your region
+          aws-region: ${{ secrets.AWS_REGION }} # Replace with your region
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-  
-
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          registry-id: ${{ secrets.ACCOUNT_ID }}
-          repository-name: vasman-test
+          registry-type: ecr
 
       - name: Build and Push Image
         run: |
           docker build -t vasman-test:latest .
-          docker push vasman-test:latest
+          docker tag vasman-test:latest ${{ secrets.ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/vasman-test:latest
+          docker push ${{ secrets.ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/vasman-test:latest
