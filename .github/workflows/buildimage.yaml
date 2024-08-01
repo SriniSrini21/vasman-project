@@ -18,6 +18,9 @@ jobs:
 
       - name: Set up Docker
         uses: actions/setup-docker@v3
+        with:
+          docker-version: 'latest'
+
 
       - name: Login to ECR
         run: |
