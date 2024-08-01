@@ -24,8 +24,5 @@ jobs:
 
       - name: Build  and Push Images
         run: |
-          docker build -t srini19081998/microservices-demo-auth:latest auth/.
+          docker build -t srini19081998/microservices-demo-auth:latest .
           docker push srini19081998/microservices-demo-auth:latest
-          docker build -t srini19081998/microservices-demo-account:latest account/.
-          docker push srini19081998/microservices-demo-account:latest
-          # Add more build and push commands for other services
