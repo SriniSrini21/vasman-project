@@ -19,13 +19,13 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Setup kubectl
-      uses: actions/setup-kubectl@v3
+      uses: kubernetes-actions/setup-kubectl@v2
       with:
         version: 'latest'
 
     - name: Setup Helm
-      uses: helm/helm@v1
+      uses: helm/helm-action@v2
       with:
-        version: v3.8.2
+        version: v3.9.0
 
 
