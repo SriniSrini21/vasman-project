@@ -18,14 +18,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Setup kubectl
-      uses: kubernetes-actions/setup-kubectl@v2
-      with:
-        version: 'latest'
+    # - name: Setup kubectl
+    #   uses: kubernetes-actions/setup-kubectl@v2
+    #   with:
+    #     version: 'latest'
 
-    - name: Setup Helm
-      uses: helm/helm-action@v2
-      with:
-        version: v3.9.0
+    # - name: Setup Helm
+    #   uses: helm/helm-action@v2
+    #   with:
+    #     version: v3.9.0
 
 
