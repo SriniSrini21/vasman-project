@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
+  namespace: vasman-namespace
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: nginx
@@ -12,23 +13,14 @@ spec:
       labels:
         app: nginx
     spec:
-      securityContext:
-        privileged: false
-        readOnlyRootFilesystem: true
-        capabilities:
-          drop:
-            - ALL
-      imagePullSecrets:
-      - name: dockerhub-secret
       containers:
       - name: nginx
-        image: nginx:latest
+        image: nginx:1.19.6
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "100m"
-          requests:
-            memory: "64Mi"
-            cpu: "50m"
+        securityContext:
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000
+          readOnlyRootFilesystem: true
