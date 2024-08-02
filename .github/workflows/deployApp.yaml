@@ -1,7 +1,20 @@
 name: Deploy to EKS
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      image_name:
+        description: 'Docker image name'
+        required: true
+        default: 'my-image'
+      image_version:
+        description: 'Docker image version'
+        required: true
+        default: 'latest'
+      namespace:
+        description: 'Kubernetes namespace'
+        required: true
+        default: 'default'
 
 jobs:
   deploy:
@@ -24,13 +37,25 @@ jobs:
     - name: Update kubeconfig
       run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
+    - name: Validate Docker image
+      run: |
+        IMAGE_NAME="${{ github.event.inputs.image_name }}"
+        IMAGE_VERSION="${{ github.event.inputs.image_version }}"
+        if ! docker manifest inspect "$IMAGE_NAME:$IMAGE_VERSION" > /dev/null 2>&1; then
+          echo "Docker image $IMAGE_NAME:$IMAGE_VERSION does not exist"
+          exit 1
+        else
+          echo "Docker image $IMAGE_NAME:$IMAGE_VERSION exists"
+        fi
 
     - name: Deployment
-      run: kubectl apply -f deployment.yaml --namespace vasman-namespace
+      run: |
+        kubectl apply -f deployment.yaml --namespace ${{ github.event.inputs.namespace }}
 
     - name: Deploy Service
-      run: kubectl apply -f service.yaml --namespace vasman-namespace
+      run: |
+        kubectl apply -f service.yaml --namespace ${{ github.event.inputs.namespace }}
 
     - name: Deploy HPA
-      run: kubectl apply -f hpa.yaml --namespace vasman-namespace
-
+      run: |
+        kubectl apply -f hpa.yaml --namespace ${{ github.event.inputs.namespace }}
