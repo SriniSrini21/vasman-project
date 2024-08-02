@@ -16,7 +16,7 @@ spec:
         - name: dockerhub-secret
       containers:
       - name: auth
-        image: docker.io/srini19081998/microservices-demo-auth:latest
+        image: busybox
         ports:
         - containerPort: 80
         resources:
