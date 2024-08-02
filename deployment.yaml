@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productdetails
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: productdetails
+  template:
+    metadata:
+      labels:
+        app: productdetails
+    spec:
+      containers:
+      - name: productdetails
+        image: microservices-demo-auth:latest  # Include a tag
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
