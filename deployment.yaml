@@ -19,9 +19,6 @@ spec:
         image: docker.io/srini19081998/microservices-demo-auth:latest
         ports:
         - containerPort: 80
-        env:
-        - name: ENV_VARIABLE_NAME
-          value: "value"
         resources:
           limits:
             memory: "512Mi"
