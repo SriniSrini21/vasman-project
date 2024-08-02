@@ -1,7 +1,8 @@
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: nginx-deployment-hpa
+  namespace: vasman-namespace
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
