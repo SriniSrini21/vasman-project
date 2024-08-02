@@ -12,9 +12,10 @@ spec:
       labels:
         app: productdetails
     spec:
+      imagePullSecrets:
+        - name: dockerhub-secret
       containers:
-      - name: productdetails
-        image: microservices-demo-auth:latest  # Include a tag
-        imagePullPolicy: Always
+      - name: auth
+        image: microservices-demo-auth:latest
         ports:
-        - containerPort: 9080
+        - containerPort: 80
