@@ -12,8 +12,14 @@ spec:
       labels:
         app: nginx
     spec:
+      securityContext:
+        privileged: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL
       imagePullSecrets:
-        - name: dockerhub-secret
+      - name: dockerhub-secret
       containers:
       - name: nginx
         image: nginx:latest
@@ -21,8 +27,8 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            memory: "256Mi"  # Maximum memory allowed
-            cpu: "200m"       # Maximum CPU allowed (200 milliCPU)
-          requests:
-            memory: "128Mi"  # Initial memory request
+            memory: "128Mi"
             cpu: "100m"
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
