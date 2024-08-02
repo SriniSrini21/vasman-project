@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth
+  name: nginx-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: auth
+      app: nginx
   template:
     metadata:
       labels:
-        app: auth
+        app: nginx
     spec:
       imagePullSecrets:
         - name: dockerhub-secret
-     containers:
+      containers:
       - name: nginx
         image: nginx:latest
         ports:
@@ -25,4 +25,4 @@ spec:
             cpu: "200m"       # Maximum CPU allowed (200 milliCPU)
           requests:
             memory: "128Mi"  # Initial memory request
-            cpu: "100m"       # Initial CPU request
+            cpu: "100m"
