@@ -16,7 +16,7 @@ spec:
         - name: dockerhub-secret
       containers:
       - name: auth
-        image: busybox
+        image: busybox:latest
         ports:
         - containerPort: 80
         resources:
