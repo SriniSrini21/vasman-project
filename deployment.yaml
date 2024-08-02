@@ -16,6 +16,6 @@ spec:
         - name: dockerhub-secret
       containers:
       - name: productdetails
-        image: microservices-demo-auth:latest
+        image: docker.io/srini19081998/microservices-demo-auth:latest
         ports:
         - containerPort: 80
