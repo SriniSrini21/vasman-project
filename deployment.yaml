@@ -1,21 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: productdetails
+  name: auth
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: productdetails
+      app: auth
   template:
     metadata:
       labels:
-        app: productdetails
+        app: auth
     spec:
       imagePullSecrets:
         - name: dockerhub-secret
       containers:
-      - name: productdetails
-        image: busybox:stable-musl
+      - name: auth
+        image: docker.io/srini19081998/microservices-demo-auth:latest
         ports:
         - containerPort: 80
+        env:
+        - name: ENV_VARIABLE_NAME
+          value: "value"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
