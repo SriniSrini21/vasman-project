@@ -15,7 +15,7 @@ spec:
       imagePullSecrets:
         - name: dockerhub-secret
       containers:
-      - name: auth
+      - name: productdetails
         image: microservices-demo-auth:latest
         ports:
         - containerPort: 80
