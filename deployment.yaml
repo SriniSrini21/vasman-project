@@ -14,15 +14,15 @@ spec:
     spec:
       imagePullSecrets:
         - name: dockerhub-secret
-      containers:
-      - name: auth
-        image: busybox:latest
+     containers:
+      - name: nginx
+        image: nginx:latest
         ports:
         - containerPort: 80
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "256Mi"  # Maximum memory allowed
+            cpu: "200m"       # Maximum CPU allowed (200 milliCPU)
           requests:
-            memory: "256Mi"
-            cpu: "250m"
+            memory: "128Mi"  # Initial memory request
+            cpu: "100m"       # Initial CPU request
