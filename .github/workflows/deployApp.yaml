@@ -26,11 +26,11 @@ jobs:
 
 
     - name: Deployment
-      run: kubectl apply -f deployment.yaml 
+      run: kubectl apply -f deployment.yaml --namespace vasman-namespace
 
     - name: Deploy Service
-      run: kubectl apply -f service.yaml
+      run: kubectl apply -f service.yaml --namespace vasman-namespace
 
     - name: Deploy HPA
-      run: kubectl apply -f hpa.yaml
+      run: kubectl apply -f hpa.yaml --namespace vasman-namespace
 
